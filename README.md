@@ -1,6 +1,6 @@
 # MAIA
 
-MAIA is my own Arch Linux setup. It started as my CachyOS install, and I turned it into something that installs on any Arch based distro: plain Arch, CachyOS, EndeavourOS, etc.
+I use Arch. MAIA is my Arch Linux setup, with all my dotfiles, apps and configurations, and a script that installs everything on a fresh Arch install. It also works on other Arch based distros.
 
 The idea is simple: I install Arch, I clone this repo, I run one script, and my PC is the same as before. Same desktop, same apps, same configs, same games in Steam. If you like it you can do the same on your PC.
 
@@ -15,7 +15,7 @@ It uses Hyprland with the Noctalia shell, kitty with fish, and Neovim (LazyVim).
 - Neovim with LazyVim, plus my VS Code settings and extensions.
 - Gaming: Steam, Heroic, Lutris, gamemode, MangoHud, PCSX2 and PPSSPP. My PS2 and PSP games are added to Steam and Heroic with covers and artwork.
 - On laptops with an NVIDIA card, Steam and the emulators always run on the NVIDIA GPU.
-- Some system tweaks I took from CachyOS: zram, sysctl, I/O schedulers, ntsync for Wine, and the fish config.
+- Some system tweaks: zram, sysctl, I/O schedulers, ntsync for Wine, and my fish config.
 
 ## How to install:
 
@@ -42,7 +42,7 @@ Before the script replaces any file, it copies it to `~/.maia-backup/`, so you d
 
 1. Turns on the multilib repo (needed for Steam and Wine) and installs everything in `packages/base.txt`.
 2. Looks at your hardware and adds what it needs: NVIDIA drivers (the right module for your kernel), Intel or AMD drivers, CPU microcode, and the ASUS tools on ASUS laptops.
-3. Installs `yay` and the AUR packages in `packages/aur.txt`. If your distro already has one of them in its repos (CachyOS does for some), it uses that version instead. DaVinci Resolve is optional because it's a big download.
+3. Installs `yay` and the AUR packages in `packages/aur.txt`. If your distro already has one of them in its own repos, it uses that version instead. DaVinci Resolve is optional because it's a big download.
 4. Copies everything in `home/` to your home folder, changing the paths to your username.
 5. Puts the system tweaks from `system/` in `/etc`, makes fish your shell, turns on the services (network, bluetooth, firewall...) and sets up the Noctalia login screen.
 6. Installs the VS Code extensions and the Neovim plugins.
@@ -93,7 +93,7 @@ Print                   screenshot
 - `home/`: all the dotfiles, in the same place they go in your home
 - `system/`: files that go to `/etc` (login screen, zram, sysctl...)
 - `gaming/`: the script that adds the games to Steam and Heroic
-- `wallpapers/`: some starter wallpapers from CachyOS, until you add your own
+- `wallpapers/`: some starter wallpapers, until you add your own
 
 ## Some notes
 
@@ -107,6 +107,6 @@ Print                   screenshot
 
 ## Acknowledgments
 
-A lot of this comes from other people's work. [CachyOS](https://cachyos.org) gave me the base of the Hyprland config, the fish config, the system tweaks and the wallpapers. [Noctalia](https://github.com/noctalia-dev/noctalia) is the shell and the login screen. [SteamGridDB](https://www.steamgriddb.com) has the game artwork. Thanks to all of them.
+A lot of this comes from other people's work. Some configs, tweaks and the starter wallpapers come from [CachyOS](https://cachyos.org). [Noctalia](https://github.com/noctalia-dev/noctalia) is the shell and the login screen. [SteamGridDB](https://www.steamgriddb.com) has the game artwork. Thanks to all of them.
 
 You're free to take it and change it however you want (MIT license).
