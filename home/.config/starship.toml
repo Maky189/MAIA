@@ -1,0 +1,87 @@
+# Powerline-style prompt: user > directory > git > (languages), time on the right.
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = true
+palette = "cozy"
+
+format = """
+[](fg:c_user)\
+$username\
+[](bg:c_dir fg:c_user)\
+$directory\
+[](fg:c_dir bg:c_git)\
+$git_branch\
+$git_status\
+[](fg:c_git bg:c_lang)\
+$c\
+$cpp\
+$python\
+$cmake\
+[](fg:c_lang)\
+$cmd_duration
+$character"""
+
+right_format = """[](fg:c_time)[ ♥ $time ](bg:c_time fg:#1a1b26)[](fg:c_time)"""
+
+[palettes.cozy]
+c_user = "#7dcfff"
+c_dir  = "#7aa2f7"
+c_git  = "#bb9af7"
+c_lang = "#3b4261"
+c_time = "#9ece6a"
+
+[username]
+show_always = true
+style_user = "bg:c_user fg:#1a1b26 bold"
+style_root = "bg:c_user fg:#f7768e bold"
+format = '[ $user ]($style)'
+
+[directory]
+style = "bg:c_dir fg:#1a1b26 bold"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+[directory.substitutions]
+"Documents" = "󰈙"
+"Downloads" = ""
+"Pictures" = ""
+"Projects" = "󰳋"
+
+[git_branch]
+symbol = ""
+style = "bg:c_git fg:#1a1b26"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:c_git fg:#1a1b26"
+format = '[$all_status$ahead_behind ]($style)'
+
+[c]
+symbol = " "
+style = "bg:c_lang fg:#7dcfff"
+format = '[ $symbol($version) ]($style)'
+[cpp]
+disabled = false
+symbol = " "
+style = "bg:c_lang fg:#7dcfff"
+format = '[ $symbol($version) ]($style)'
+[python]
+symbol = " "
+style = "bg:c_lang fg:#e0af68"
+format = '[ $symbol($version)( \($virtualenv\)) ]($style)'
+[cmake]
+symbol = "△ "
+style = "bg:c_lang fg:#9ece6a"
+format = '[ $symbol($version) ]($style)'
+
+[cmd_duration]
+min_time = 2000
+format = " [󰔛 $duration](#e0af68)"
+
+[time]
+disabled = false
+time_format = "%H:%M"
+format = "$time"
+
+[character]
+success_symbol = "[❯](bold #9ece6a)"
+error_symbol = "[❯](bold #f7768e)"

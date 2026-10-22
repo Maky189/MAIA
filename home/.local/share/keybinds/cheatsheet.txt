@@ -1,0 +1,89 @@
+HYPRLAND KEYBINDS   (SUPER = Windows key)    press q to close
+=========================================================
+
+APPS
+  SUPER + Return          Terminal
+  SUPER + W               Browser
+  SUPER + E               File manager
+  SUPER + T               Editor
+  SUPER + C               Calculator
+  SUPER + Space           App launcher
+  SUPER + V               Clipboard history
+  SUPER + X               Control center
+  SUPER + Z               Settings
+  CTRL+SHIFT + Escape     System monitor (btop)
+  SUPER + H               This cheat sheet
+
+WINDOWS
+  SUPER + Q               Close window
+  SUPER + F               Fullscreen
+  SUPER + D               Maximize (keep bar)
+  SUPER + ALT + Space     Toggle floating
+  SUPER + J               Toggle split direction
+  SUPER + Arrows          Move focus
+  SUPER + SHIFT + Arrows  Move window
+  ALT + Tab               Cycle windows
+  SUPER + Tab             Window switcher
+  SUPER + left-drag       Move window
+  SUPER + right-drag      Resize window
+  SUPER + Escape          Kill a window (click it)
+
+WORKSPACES
+  SUPER + ALT + 1-9       Go to workspace N
+  SUPER + CTRL + 1-9      Go to workspace N (this monitor)
+  SUPER + CTRL + Left/Right   Previous / next workspace
+  SUPER + CTRL + Down     Jump to empty workspace
+  SUPER + SHIFT+CTRL + 1-9    Send window to workspace N
+  SUPER + mouse wheel     Switch workspace
+  SUPER + S               Toggle scratchpad
+  SUPER + SHIFT + S       Send window to scratchpad
+  SUPER + ALT + S         Send focused scratchpad window back to this workspace
+  SUPER + CTRL + S        Send ALL windows of this workspace to scratchpad
+  SUPER + CTRL+SHIFT + S  Bring ALL scratchpad windows to this workspace
+
+OTHER
+  Print                   Screenshot (region)
+  SUPER + Print           Screenshot (full screen)
+  SUPER + P               Color picker
+  SUPER + L               Lock screen
+  SUPER + Minus / Plus    Zoom out / in
+  SUPER + SHIFT + W       Wallpaper picker
+  SUPER + A               Notifications
+
+Full list: ~/.config/hypr/config/binds.lua
+
+AI AGENTS (desktop)
+  SUPER + SHIFT + C       Claude Code in a terminal
+  SUPER + SHIFT + X       Codex in a terminal
+  SUPER + K               Toggle terminal clock
+  SUPER + SHIFT + K       Rice layout (fastfetch/btop/clock/cava/bonsai)
+  SUPER + Y               Yazi file manager
+  SUPER + SHIFT + M       Spotify player
+  SUPER + SHIFT + R       Start / stop screen recording
+  SUPER + SHIFT + W       Wallpaper picker
+
+NEOVIM   (leader = Space)
+  Space a c / a f         Toggle / focus Claude sidebar
+  Space a r / a C         Resume / continue Claude
+  Space a b               Add current file to Claude
+  Space a s               Send selection to Claude (visual)
+  Space a a / a d         Accept / deny Claude diff
+  Space a x               Toggle Codex sidebar
+  Space a X               Resume last Codex session
+  Space a B               Add current file to Codex
+  Space a S               Send selection to Codex (visual)
+  Ctrl + ,                Toggle Codex from anywhere
+  Space Space             Find files
+  Space /                 Search in project (grep)
+  Space e                 File explorer
+  Space u C               Change colorscheme / theme (live preview, remembered)
+  Space b b               Switch buffer
+  Space c a / c r / c f   Code action / rename / format
+  g d / K                 Go to definition / hover docs
+  Space d b / d c / d u   Breakpoint / run-continue / debug UI
+  Space g g               Lazygit
+  Space m t               TerraFora: toggle build/run terminal
+  Ctrl + /                Toggle floating terminal on/off
+  Space f t / f T         Terminal (cwd / project root)
+  Ctrl + \ Ctrl + n       Terminal mode -> normal mode (scroll/copy)
+  Space ?                 Show all keymaps (which-key)

@@ -1,0 +1,37 @@
+* {
+  bg:      #1a1b26e8;
+  bg-alt:  #24283b;
+  fg:      #c0caf5;
+  dim:     #565f89;
+  accent:  #7dcfff;
+  accent2: #bb9af7;
+  font: "FantasqueSansM Nerd Font Mono 13";
+  background-color: transparent;
+  text-color: @fg;
+}
+window {
+  location: center;
+  width: 640px;
+  background-color: @bg;
+  border: 2px;
+  border-color: @accent;
+  border-radius: 22px;
+}
+mainbox { padding: 20px; spacing: 14px; children: [ inputbar, listview, mode-switcher ]; }
+inputbar {
+  padding: 12px 16px;
+  spacing: 10px;
+  background-color: @bg-alt;
+  border-radius: 14px;
+  children: [ prompt, entry ];
+}
+prompt { text-color: @accent; }
+entry { placeholder: "Search…"; placeholder-color: @dim; }
+listview { lines: 8; columns: 1; scrollbar: false; spacing: 4px; fixed-height: true; }
+element { padding: 9px 14px; spacing: 14px; border-radius: 12px; }
+element selected.normal { background-color: @bg-alt; border: 0 0 0 3px; border-color: @accent2; text-color: @accent; }
+element-icon { size: 30px; }
+element-text { vertical-align: 0.5; }
+mode-switcher { spacing: 8px; }
+button { padding: 8px; border-radius: 10px; horizontal-align: 0.5; text-color: @dim; }
+button selected { background-color: @bg-alt; text-color: @accent; }

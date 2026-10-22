@@ -1,0 +1,10 @@
+egl-wayland
+lib32-nvidia-utils
+lib32-opencl-nvidia
+libva-nvidia-driver
+linux-cachyos-lts-nvidia-open
+linux-cachyos-nvidia-open
+nvidia-prime
+nvidia-settings
+nvidia-utils
+opencl-nvidia

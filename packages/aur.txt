@@ -1,0 +1,11 @@
+ai-usagebar-bin
+ani-cli
+cbonsai
+duckstation-qt-bin
+jetbrains-toolbox
+minecraft-launcher
+notion-app-electron
+pcsx2-latest-bin
+unimatrix-git
+visual-studio-code-bin
+bibata-cursor-theme-bin

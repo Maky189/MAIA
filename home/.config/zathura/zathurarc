@@ -1,0 +1,28 @@
+set selection-clipboard clipboard
+set recolor false
+set guioptions none
+set font "FantasqueSansM Nerd Font 11"
+set adjust-open best-fit
+set scroll-step 80
+set page-padding 8
+
+set default-bg           "#1a1b26"
+set default-fg           "#c0caf5"
+set statusbar-bg         "#24283b"
+set statusbar-fg         "#c0caf5"
+set inputbar-bg          "#24283b"
+set inputbar-fg          "#7dcfff"
+set notification-bg      "#24283b"
+set notification-fg      "#9ece6a"
+set notification-error-bg "#24283b"
+set notification-error-fg "#f7768e"
+set highlight-color      "#bb9af7"
+set highlight-active-color "#7aa2f7"
+set completion-bg        "#24283b"
+set completion-fg        "#c0caf5"
+set completion-highlight-bg "#7aa2f7"
+set completion-highlight-fg "#1a1b26"
+set recolor-lightcolor   "#1a1b26"
+set recolor-darkcolor    "#c0caf5"
+
+map i recolor

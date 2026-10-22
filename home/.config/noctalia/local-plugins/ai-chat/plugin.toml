@@ -1,0 +1,24 @@
+# Bar button that opens a Claude / Codex chat panel (Quickshell window, see
+# ~/.config/quickshell/aichat). The widget itself only draws the icon and launches
+# ~/.local/bin/aichat-toggle on click.
+
+id = "local/ai-chat"
+name = "AI Chat"
+version = "1.0.0"
+plugin_api = 26
+author = "local"
+license = "MIT"
+dependencies = ["quickshell", "claude", "codex"]
+tags = ["bar", "ai", "chat"]
+icon = "message-chatbot"
+description = "Chat with Claude or Codex from a button in the bar."
+
+[[setting]]
+key = "glyph"
+type = "glyph"
+label_key = "settings.glyph.label"
+default = "message-chatbot"
+
+[[widget]]
+id = "chat"
+entry = "widget.luau"

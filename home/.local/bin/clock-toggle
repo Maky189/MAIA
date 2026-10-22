@@ -1,0 +1,8 @@
+#!/bin/sh
+# Toggle the floating tty-clock window.
+addr=$(hyprctl clients -j | jq -r '.[] | select(.class == "clock") | .address' | head -1)
+if [ -n "$addr" ]; then
+  hyprctl dispatch "hl.dsp.window.close({ window = \"address:$addr\" })" >/dev/null
+else
+  exec uwsm app -- kitty --class clock --title clock -e fish -c clock
+fi

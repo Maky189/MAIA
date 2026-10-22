@@ -1,0 +1,236 @@
+#!/usr/bin/env -S python3 -I
+"""Backend for the Noctalia AI chat panel (Claude Code / Codex).
+
+  aichat-send list                          -> JSON [{id, provider, title, updated, count}], newest first
+  aichat-send latest <provider>             -> newest conversation of that provider (or {})
+  aichat-send load   <id>                   -> one conversation
+  aichat-send delete <id>                   -> remove a conversation
+  aichat-send send   <provider> [id]        -> prompt from $AICHAT_PROMPT / stdin; JSON lines on stdout:
+        {"t":"conv","id":..} {"t":"delta"|"status"|"error","text":..} {"t":"done"}
+
+Each conversation is ~/.local/state/aichat/convs/<id>.json and is resumed with the CLI's own
+session id, so context carries over between questions, panel restarts and history re-opens.
+"""
+import json, os, signal, subprocess, sys, time
+
+CHILD = None
+
+
+def _term(*_):
+    if CHILD and CHILD.poll() is None:
+        CHILD.terminate()
+    sys.exit(0)
+
+
+signal.signal(signal.SIGTERM, _term)
+
+STATE = os.path.expanduser("~/.local/state/aichat")
+# The panel is launched by Noctalia, whose PATH lacks ~/.local/bin (where `claude` lives).
+os.environ["PATH"] = ":".join([os.path.expanduser("~/.local/bin"), "/usr/local/bin", "/usr/bin", os.environ.get("PATH", "")])
+
+SYSTEM = ("You are a chat assistant inside a small desktop panel on the user's Linux (Arch/Hyprland) "
+          "machine. Keep answers concise and well formatted in Markdown. You may read files to help.")
+
+
+CONVS = os.path.join(STATE, "convs")
+
+
+def conv_path(cid):
+    return os.path.join(CONVS, f"{cid}.json")
+
+
+def load_conv(cid):
+    try:
+        with open(conv_path(cid)) as f:
+            d = json.load(f)
+        return d if isinstance(d, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_conv(d):
+    os.makedirs(CONVS, exist_ok=True)
+    tmp = conv_path(d["id"]) + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(d, f)
+    os.replace(tmp, conv_path(d["id"]))
+
+
+def title_of(text):
+    t = " ".join(text.split())
+    return t if len(t) <= 60 else t[:57] + "…"
+
+
+def migrate():
+    """Old single-conversation files (<provider>.json) become normal conversations."""
+    for prov in ("claude", "codex"):
+        old = os.path.join(STATE, f"{prov}.json")
+        if not os.path.exists(old):
+            continue
+        try:
+            with open(old) as f:
+                d = json.load(f)
+            msgs = d.get("messages", [])
+            if msgs:
+                first = next((m["text"] for m in msgs if m.get("role") == "user"), "Conversation")
+                save_conv({"id": f"old-{prov}", "provider": prov, "title": title_of(first),
+                           "updated": os.path.getmtime(old), "session": d.get("session", ""), "messages": msgs})
+            os.remove(old)
+        except Exception:
+            pass
+
+
+def all_convs():
+    migrate()
+    out = []
+    try:
+        names = os.listdir(CONVS)
+    except FileNotFoundError:
+        return out
+    for n in names:
+        if n.endswith(".json"):
+            d = load_conv(n[:-5])
+            if d.get("id") and d.get("messages"):
+                out.append(d)
+    out.sort(key=lambda d: d.get("updated", 0), reverse=True)
+    return out
+
+
+def emit(**kw):
+    sys.stdout.write(json.dumps(kw) + "\n")
+    sys.stdout.flush()
+
+
+def run_claude(prompt, sid):
+    cmd = ["claude", "-p", "--output-format", "stream-json", "--verbose", "--include-partial-messages",
+           "--tools", "Read,Glob,Grep", "--append-system-prompt", SYSTEM]
+    if sid:
+        cmd += ["--resume", sid]
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         text=True, cwd=os.path.expanduser("~"))
+    global CHILD
+    CHILD = p
+    p.stdin.write(prompt)
+    p.stdin.close()
+    new_sid, text, err = sid, "", ""
+    for line in p.stdout:
+        try:
+            e = json.loads(line)
+        except ValueError:
+            continue
+        t = e.get("type")
+        if e.get("session_id"):
+            new_sid = e["session_id"]
+        if t == "stream_event":
+            ev = e.get("event", {})
+            if ev.get("type") == "content_block_delta" and ev.get("delta", {}).get("type") == "text_delta":
+                text += ev["delta"]["text"]
+                emit(t="delta", text=ev["delta"]["text"])
+            elif ev.get("type") == "content_block_start":
+                cb = ev.get("content_block", {})
+                if cb.get("type") == "tool_use":
+                    emit(t="status", text=f"Using {cb.get('name', 'a tool')}…")
+                elif cb.get("type") == "thinking":
+                    emit(t="status", text="Thinking…")
+        elif t == "result":
+            if e.get("is_error"):
+                err = e.get("result") or "Claude returned an error"
+            elif not text:
+                text = e.get("result", "")
+                emit(t="delta", text=text)
+    p.wait()
+    if not text and not err:
+        err = (p.stderr.read() or "No response").strip()[-400:]
+    return new_sid, text, err
+
+
+def run_codex(prompt, sid):
+    cmd = ["codex", "exec", "--json", "--skip-git-repo-check", "-s", "read-only"]
+    cmd += ["resume", sid, "-"] if sid else ["-"]
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         text=True, cwd=os.path.expanduser("~"))
+    global CHILD
+    CHILD = p
+    p.stdin.write(prompt)
+    p.stdin.close()
+    new_sid, text, err = sid, "", ""
+    emit(t="status", text="Thinking…")
+    for line in p.stdout:
+        try:
+            e = json.loads(line)
+        except ValueError:
+            continue
+        t = e.get("type")
+        if t == "thread.started":
+            new_sid = e.get("thread_id", new_sid)
+        elif t in ("item.started", "item.updated"):
+            it = e.get("item", {})
+            if it.get("type") == "command_execution":
+                emit(t="status", text="Running a command…")
+            elif it.get("type") == "reasoning":
+                emit(t="status", text="Thinking…")
+        elif t == "item.completed":
+            it = e.get("item", {})
+            if it.get("type") == "agent_message":
+                text += (("\n\n" if text else "") + it.get("text", ""))
+                emit(t="delta", text=it.get("text", ""))
+        elif t in ("error", "turn.failed"):
+            err = (e.get("message") or e.get("error", {}).get("message") or "Codex failed")
+    p.wait()
+    if not text and not err:
+        err = (p.stderr.read() or "No response").strip()[-400:]
+    return new_sid, text, err
+
+
+def main():
+    if len(sys.argv) < 2:
+        sys.exit("usage: aichat-send list|latest|load|delete|send ...")
+    cmd = sys.argv[1]
+    arg = sys.argv[2] if len(sys.argv) > 2 else ""
+    if cmd == "list":
+        print(json.dumps([{"id": d["id"], "provider": d.get("provider", "claude"), "title": d.get("title", ""),
+                           "updated": d.get("updated", 0), "count": len(d.get("messages", []))}
+                          for d in all_convs()]))
+    elif cmd == "latest":
+        d = next((c for c in all_convs() if c.get("provider") == arg), {})
+        print(json.dumps(d))
+    elif cmd == "load":
+        print(json.dumps(load_conv(arg)))
+    elif cmd == "delete":
+        try:
+            os.remove(conv_path(arg))
+        except FileNotFoundError:
+            pass
+    elif cmd == "send":
+        prov = arg
+        if prov not in ("claude", "codex"):
+            sys.exit("unknown provider")
+        cid = sys.argv[3] if len(sys.argv) > 3 else ""
+        prompt = (os.environ.get("AICHAT_PROMPT") or sys.stdin.read()).strip()
+        if not prompt:
+            return
+        d = load_conv(cid) if cid else {}
+        if not d:
+            cid = cid or time.strftime("%Y%m%d-%H%M%S")
+            d = {"id": cid, "provider": prov, "title": title_of(prompt), "session": "", "messages": []}
+        emit(t="conv", id=d["id"])
+        msgs = d["messages"]
+        msgs.append({"role": "user", "text": prompt})
+        try:
+            sid, text, err = (run_claude if prov == "claude" else run_codex)(prompt, d.get("session", ""))
+        except FileNotFoundError:
+            sid, text, err = d.get("session", ""), "", f"`{prov}` is not installed"
+        if err:
+            emit(t="error", text=err)
+            msgs.pop()
+            if msgs:
+                save_conv(d)
+        else:
+            msgs.append({"role": "assistant", "text": text})
+            d.update(session=sid, messages=msgs[-200:], updated=time.time())
+            save_conv(d)
+        emit(t="done")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,83 @@
+{
+    "editor.minimap.enabled": false,
+    "git.autofetch": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "terminal.integrated.fontWeight": "normal",
+    "security.workspace.trust.untrustedFiles": "open",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "explorer.confirmDelete": false,
+    "workbench.editor.empty.hint": "hidden",
+    "git.openRepositoryInParentFolders": "always",
+    "tabnine.experimentalAutoImports": true,
+    "terminal.integrated.fontSize": 13,
+    "cmake.configureOnOpen": true,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "accessibility.signals.terminalBell": {
+        "sound": "on"
+    },
+    "terminal.integrated.enableVisualBell": true,
+    "editor.stickyScroll.enabled": false,
+    "redhat.telemetry.enabled": true,
+    "python.defaultInterpreterPath": "C:\\Users\\marco\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe",
+    "haskell.manageHLS": "GHCup",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "msg.dbEditor.connectionBrowser.showGreeting": false,
+    "makefile.configureOnOpen": true,
+    "git.enableSmartCommit": true,
+    "chat.editing.confirmEditRequestRetry": false,
+    "glassit.alpha": 255,
+    "chat.instructionsFilesLocations": {
+        ".github/instructions": true,
+        ".claude/rules": true,
+        "~/.copilot/instructions": true,
+        "~/.claude/rules": true,
+        "/tmp/postman-http-request-post-response.instructions.md": true,
+        "/tmp/postman-http-request-pre-request.instructions.md": true,
+        "/tmp/postman-collections-post-response.instructions.md": true,
+        "/tmp/postman-collections-pre-request.instructions.md": true,
+        "/tmp/postman-folder-post-response.instructions.md": true,
+        "/tmp/postman-folder-pre-request.instructions.md": true,
+        "C:\\Users\\marco\\AppData\\Local\\Temp\\postman-collections-post-response.instructions.md": true,
+        "C:\\Users\\marco\\AppData\\Local\\Temp\\postman-collections-pre-request.instructions.md": true,
+        "C:\\Users\\marco\\AppData\\Local\\Temp\\postman-folder-post-response.instructions.md": true,
+        "C:\\Users\\marco\\AppData\\Local\\Temp\\postman-folder-pre-request.instructions.md": true,
+        "C:\\Users\\marco\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
+        "C:\\Users\\marco\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.automationProfile.linux": { "path": "/bin/bash" },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "workbench.colorTheme": "Dark Modern",
+    "remote.autoForwardPortsSource": "hybrid",
+    "yaml.disableSchemaDetection": [
+        "**/.github/workflows/*.yml",
+        "**/.github/workflows/*.yaml",
+        "**/.gitea/workflows/*.yml",
+        "**/.gitea/workflows/*.yaml",
+        "**/.forgejo/workflows/*.yml",
+        "**/.forgejo/workflows/*.yaml"
+    ],
+    "settingsSync.ignoredExtensions": [
+        "softwaredotcom.swdc-vscode",
+        "fresauce.discord-leaderboard",
+        "icrawl.discord-vscode",
+        "leonardssh.vscord"
+    ],
+    "remote.SSH.remotePlatform": {
+        "172.19.180.110": "linux"
+    },
+
+    "remote.SSH.useLocalServer": true,
+    "remote.SSH.useExecServer": false,
+    "claudeCode.hideOnboarding": true,
+    "chat.viewSessions.orientation": "stacked"
+}

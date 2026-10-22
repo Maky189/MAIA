@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=AI chat panel (background)
+Comment=Keeps the bar chat panel loaded so it opens instantly
+Exec=quickshell -p __HOME__/.config/quickshell/aichat -d
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

@@ -1,0 +1,11 @@
+#!/bin/sh
+# Toggle the AI chat panel. The panel runs resident in the background (started at login),
+# so showing it is instant; start it first if it is not running.
+QML="$HOME/.config/quickshell/aichat"
+if ! quickshell ipc -p "$QML" call aichat toggle >/dev/null 2>&1; then
+  quickshell -p "$QML" -d >/dev/null 2>&1
+  for _ in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
+    quickshell ipc -p "$QML" call aichat toggle >/dev/null 2>&1 && exit 0
+    sleep 0.1
+  done
+fi

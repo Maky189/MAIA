@@ -1,0 +1,14 @@
+configuration {
+  modi: "drun,run,window";
+  show-icons: true;
+  icon-theme: "breeze-dark";
+  display-drun: "  Apps";
+  display-run: "  Run";
+  display-window: "  Windows";
+  drun-display-format: "{name}";
+  window-format: "{w} · {c}";
+  sorting-method: "fzf";
+  matching: "fuzzy";
+  kb-cancel: "Escape,Super+space";
+}
+@theme "cozy"

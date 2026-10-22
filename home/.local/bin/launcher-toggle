@@ -1,0 +1,7 @@
+#!/bin/sh
+# Toggle the Quickshell app launcher overlay.
+if pgrep -f "quickshell.*launcher" >/dev/null; then
+  pkill -f "quickshell.*launcher"
+else
+  exec quickshell -p "$HOME/.config/quickshell/launcher"
+fi

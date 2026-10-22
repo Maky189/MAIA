@@ -1,0 +1,95 @@
+#!/usr/bin/env -S python3 -I
+"""Keep Brave and the AI chat panel preloaded (fast Super+W / bar chat button), but free
+them while a game is running.
+
+- No game: make sure a window-less Brave is running in the background.
+- Game running: stop Brave if it has no open windows (open windows are left alone),
+  and stop the background AI chat panel; it is started again when the game closes.
+
+A game is a window whose class looks like Steam/Proton/Wine/gamescope, or
+gamemode being active (Lutris/Heroic/gamemoderun).
+"""
+import json, os, re, socket, subprocess, time
+
+GAME_CLASS = re.compile(r"^(steam_app_\d+|gamescope|.*\.exe)$", re.I)
+BRAVE_CLASS = re.compile(r"brave", re.I)
+
+
+def clients():
+    try:
+        return json.loads(subprocess.run(["hyprctl", "clients", "-j"], capture_output=True, text=True).stdout)
+    except Exception:
+        return []
+
+
+def gamemode_active():
+    try:
+        out = subprocess.run(["gamemoded", "-s"], capture_output=True, text=True, timeout=2).stdout
+        return "is active" in out
+    except Exception:
+        return False
+
+
+def brave_running():
+    return subprocess.run(["pgrep", "-x", "brave"], capture_output=True).returncode == 0
+
+
+PANEL_DIR = os.path.expanduser("~/.config/quickshell/aichat")
+PANEL_PATTERN = "^quickshell -p " + PANEL_DIR
+panel_stopped = False
+
+
+def panel_running():
+    return subprocess.run(["pgrep", "-f", PANEL_PATTERN], capture_output=True).returncode == 0
+
+
+def sync():
+    global panel_stopped
+    cs = clients()
+    game = any(GAME_CLASS.match(c.get("class", "") or "") for c in cs) or gamemode_active()
+    brave_windows = any(BRAVE_CLASS.search(c.get("class", "") or "") for c in cs)
+    if game:
+        if brave_running() and not brave_windows:
+            subprocess.run(["pkill", "-x", "brave"])
+        if panel_running():
+            subprocess.run(["pkill", "-f", PANEL_PATTERN])
+            panel_stopped = True
+    else:
+        if not brave_running():
+            subprocess.Popen(["brave", "--no-startup-window"], stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL, start_new_session=True)
+        if panel_stopped and not panel_running():
+            subprocess.Popen(["quickshell", "-p", PANEL_DIR, "-d"], stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL, start_new_session=True)
+        panel_stopped = False
+
+
+def main():
+    sig = os.environ.get("HYPRLAND_INSTANCE_SIGNATURE")
+    path = f"{os.environ.get('XDG_RUNTIME_DIR', '/run/user/%d' % os.getuid())}/hypr/{sig}/.socket2.sock"
+    sync()
+    while True:
+        try:
+            s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            s.connect(path)
+            s.settimeout(10)  # also re-check every 10 s (gamemode has no window event)
+            buf = b""
+            while True:
+                try:
+                    data = s.recv(4096)
+                except socket.timeout:
+                    sync()
+                    continue
+                if not data:
+                    break
+                buf += data
+                *lines, buf = buf.split(b"\n")
+                if any(l.startswith((b"openwindow>>", b"closewindow>>")) for l in lines):
+                    time.sleep(0.5)  # let the window settle / process exit
+                    sync()
+        except OSError:
+            time.sleep(5)
+
+
+if __name__ == "__main__":
+    main()

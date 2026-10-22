@@ -1,0 +1,10 @@
+#!/bin/sh
+# Toggle the transparent wallpaper picker overlay (falls back to the Noctalia panel).
+if ! command -v quickshell >/dev/null 2>&1; then
+  exec noctalia msg panel-toggle local/wallpaper-hub:hub
+fi
+if pgrep -f "quickshell.*wallhub" >/dev/null; then
+  pkill -f "quickshell.*wallhub"
+else
+  exec quickshell -p "$HOME/.config/quickshell/wallhub"
+fi

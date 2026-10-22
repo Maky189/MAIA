@@ -1,0 +1,13 @@
+[Added Associations]
+video/mp4=vlc.desktop;
+
+[Default Applications]
+inode/directory=org.kde.dolphin.desktop;
+text/plain=org.gnome.TextEditor.desktop;
+video/mp4=vlc.desktop;
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/jetbrains=jetbrainsd.desktop
+application/pdf=org.pwmt.zathura.desktop
+x-scheme-handler/notion=notion.desktop

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Discord
+Exec=/usr/bin/discord --start-minimized
+Icon=discord
+Terminal=false
+X-GNOME-Autostart-enabled=true

@@ -1,0 +1,6 @@
+[
+  {"key": "gow1", "title": "God of War", "system": "ps2", "iso": "~/Games/PS2/God of War (USA).iso", "sgdb_id": 36454},
+  {"key": "gow2", "title": "God of War II", "system": "ps2", "iso": "~/Games/PS2/God of War II (USA).iso", "sgdb_id": 35531},
+  {"key": "coo", "title": "God of War: Chains of Olympus", "system": "psp", "iso": "~/Games/PSP/God of War - Chains of Olympus (USA).iso", "sgdb_id": 36385},
+  {"key": "gos", "title": "God of War: Ghost of Sparta", "system": "psp", "iso": "~/Games/PSP/God of War - Ghost of Sparta (USA) (PSN).iso", "sgdb_id": 4561}
+]

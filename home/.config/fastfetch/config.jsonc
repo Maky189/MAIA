@@ -1,0 +1,124 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "kitty-direct",
+    "source": "~/.config/fastfetch/logo.png",
+    "width": 24,
+    "padding": {
+      "right": 2
+    }
+  },
+  "display": {
+    "separator": " ",
+    "percent": {
+      "type": [
+        "bar",
+        "num"
+      ],
+      "color": {
+        "green": "38;2;158;206;106",
+        "yellow": "38;2;224;175;104",
+        "red": "38;2;247;118;142"
+      }
+    },
+    "bar": {
+      "width": 8,
+      "char": {
+        "elapsed": "━",
+        "total": "╌"
+      },
+      "border": {
+        "left": "",
+        "right": ""
+      }
+    }
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "{#90}╭───────────╮"
+    },
+    {
+      "type": "title",
+      "format": "{user-name}@{host-name}",
+      "key": "{#90}│ {#38;2;247;118;142} user    {#90}│"
+    },
+    {
+      "type": "host",
+      "format": "{2}",
+      "key": "{#90}│ {#38;2;122;162;247} host    {#90}│"
+    },
+    {
+      "type": "uptime",
+      "key": "{#90}│ {#38;2;125;207;255}󰔛 uptime  {#90}│"
+    },
+    {
+      "type": "os",
+      "format": "Arch Linux {12}",
+      "key": "{#90}│ {#38;2;187;154;247}󰣇 distro  {#90}│"
+    },
+    {
+      "type": "kernel",
+      "key": "{#90}│ {#38;2;158;206;106} kernel  {#90}│"
+    },
+    {
+      "type": "packages",
+      "key": "{#90}│ {#38;2;224;175;104}󰏖 pkgs    {#90}│"
+    },
+    {
+      "type": "wm",
+      "key": "{#90}│ {#38;2;187;154;247} wm      {#90}│"
+    },
+    {
+      "type": "terminal",
+      "key": "{#90}│ {#38;2;158;206;106} term    {#90}│"
+    },
+    {
+      "type": "shell",
+      "key": "{#90}│ {#38;2;247;118;142} shell   {#90}│"
+    },
+    {
+      "type": "cpu",
+      "format": "{name}",
+      "key": "{#90}│ {#38;2;224;175;104} cpu     {#90}│"
+    },
+    {
+      "type": "gpu",
+      "hideType": "integrated",
+      "format": "NVIDIA RTX 3050 (4 GB VRAM)",
+      "key": "{#90}│ {#38;2;158;206;106}󰢮 gpu     {#90}│"
+    },
+    {
+      "type": "memory",
+      "percent": {
+        "type": [
+          "bar",
+          "num"
+        ]
+      },
+      "format": "{1} / {2}  {3}",
+      "key": "{#90}│ {#38;2;187;154;247}󰍛 memory  {#90}│"
+    },
+    {
+      "type": "disk",
+      "folders": "/",
+      "percent": {
+        "type": [
+          "bar",
+          "num"
+        ]
+      },
+      "format": "{1} / {2}  {3}",
+      "key": "{#90}│ {#38;2;122;162;247}󰋊 disk    {#90}│"
+    },
+    {
+      "type": "custom",
+      "format": "{#90}╰───────────╯"
+    },
+    {
+      "type": "colors",
+      "symbol": "circle",
+      "paddingLeft": 1
+    }
+  ]
+}

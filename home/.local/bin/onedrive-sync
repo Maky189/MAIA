@@ -1,0 +1,7 @@
+#!/bin/sh
+# Two-way sync of Documents and Pictures with OneDrive (Documentos / Imagens).
+# First run for a pair: onedrive-sync --resync
+exec 9>/tmp/onedrive-sync.lock; flock -n 9 || exit 0
+opts="--create-empty-src-dirs --resilient --recover --conflict-resolve newer --compare size,modtime --max-delete 50 -v"
+rclone bisync "$HOME/Documents" onedrive:Documentos $opts "$@"
+rclone bisync "$HOME/Pictures"  onedrive:Imagens    $opts "$@"

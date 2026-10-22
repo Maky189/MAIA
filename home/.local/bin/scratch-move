@@ -1,0 +1,22 @@
+#!/bin/sh
+# Move windows between the current workspace and the scratchpad (special workspace).
+exec >>/tmp/scratch-move.log 2>&1
+#   ws-to     all windows of the current workspace -> scratchpad
+#   ws-from   all windows of the scratchpad -> current workspace
+#   win-from  focused window (from the scratchpad) -> current workspace
+mon=$(hyprctl monitors -j | jq '.[] | select(.focused)')
+cur=$(echo "$mon" | jq -r '.activeWorkspace.id')
+
+move() { hyprctl dispatch "hl.dsp.window.move({ workspace = \"$1\", follow = false, window = \"address:$2\" })" >/dev/null; }
+
+case "$1" in
+  ws-to)
+    hyprctl clients -j | jq -r --argjson w "$cur" '.[]|select(.workspace.id==$w)|.address' |
+      while read -r a; do move special "$a"; done ;;
+  ws-from)
+    hyprctl clients -j | jq -r '.[]|select(.workspace.name=="special:special")|.address' |
+      while read -r a; do move "$cur" "$a"; done ;;
+  win-from)
+    a=$(hyprctl activewindow -j | jq -r '.address')
+    move "$cur" "$a" ;;
+esac

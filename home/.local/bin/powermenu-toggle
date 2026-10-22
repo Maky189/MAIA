@@ -1,0 +1,7 @@
+#!/bin/sh
+# Toggle the Quickshell power menu overlay.
+if pgrep -f "quickshell.*powermenu" >/dev/null; then
+  pkill -f "quickshell.*powermenu"
+else
+  exec quickshell -p "$HOME/.config/quickshell/powermenu"
+fi

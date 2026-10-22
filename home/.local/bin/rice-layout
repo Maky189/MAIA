@@ -1,0 +1,46 @@
+#!/bin/sh
+# Toggle the rice-video scene on the next blank workspace.
+#   (wallpaper stays visible behind the cards)
+#   Floating cards : fastfetch terminal, clock, cava, bonsai, btop
+# Window sizes/positions live in ~/.config/hypr/config/windowrules.lua (class ^rice-).
+STATE="${XDG_RUNTIME_DIR:-/tmp}/rice-layout.prev"
+addrs() { hyprctl clients -j | jq -r '.[] | select(.class | startswith("rice-")) | .address'; }
+count() { addrs | grep -c .; }
+
+if [ "$(count)" -gt 0 ]; then
+  for a in $(addrs); do hyprctl dispatch "hl.dsp.window.close({ window = \"address:$a\" })" >/dev/null; done
+  prev=$(cat "$STATE" 2>/dev/null)
+  [ -n "$prev" ] && hyprctl dispatch "hl.dsp.focus({ workspace = \"$prev\" })" >/dev/null
+  exit 0
+fi
+
+hyprctl activeworkspace -j | jq -r .name > "$STATE"
+
+# Blank workspace: the current one if it is empty, else the lowest-numbered empty one.
+WS=$(hyprctl workspaces -j | jq -r --argjson cur "$(hyprctl activeworkspace -j)" '
+  ([ .[] | select(.id > 0 and .windows > 0) | .id ]) as $used
+  | if $cur.windows == 0 and $cur.id > 0 then $cur.id
+    else first(range(1; 100) | select(. as $i | $used | index($i) | not)) end')
+hyprctl dispatch "hl.dsp.focus({ workspace = \"$WS\" })" >/dev/null
+# make sure the switch really happened before launching anything
+i=0; while [ "$(hyprctl activeworkspace -j | jq -r .id)" != "$WS" ] && [ $i -lt 40 ]; do sleep 0.05; i=$((i+1)); done
+
+launch() {  # launch <name> <command...>; wait until the window shows up
+  n=$(count); name=$1; shift
+  uwsm app -- kitty --class "rice-$name" --title "$name" "$@" >/dev/null 2>&1 &
+  i=0; while [ "$(count)" -le "$n" ] && [ $i -lt 100 ]; do sleep 0.05; i=$((i+1)); done
+}
+
+launch btop    btop
+launch bonsai  fish -c 'bonsai'
+launch cava    cava -p "$HOME/.config/cava/rice.conf"
+launch clock   fish -c 'clock'
+launch term    fish -C 'clear; fastfetch'
+
+# Safety net: pull any card that mapped on another workspace back onto the scene.
+sleep 0.3
+hyprctl clients -j | jq -r --argjson ws "$WS" '.[] | select((.class | startswith("rice-")) and .workspace.id != $ws) | .address' |
+while read -r a; do
+  hyprctl dispatch "hl.dsp.window.move({ workspace = \"$WS\", window = \"address:$a\", follow = false })" >/dev/null
+done
+hyprctl dispatch "hl.dsp.focus({ window = \"class:^rice-term$\" })" >/dev/null 2>&1

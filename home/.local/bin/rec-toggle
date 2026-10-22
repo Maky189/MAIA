@@ -1,0 +1,10 @@
+#!/bin/sh
+# Toggle a screen recording (NVENC via gpu-screen-recorder) -> ~/Videos/rec-<time>.mp4
+if pgrep -f '^gpu-screen-recorder' >/dev/null; then
+  pkill -SIGINT -f '^gpu-screen-recorder'
+  notify-send -a Recorder "Recording saved" "$HOME/Videos"
+else
+  out="$HOME/Videos/rec-$(date +%Y%m%d-%H%M%S).mp4"
+  notify-send -a Recorder "Recording started" "Super+Shift+R to stop"
+  exec gpu-screen-recorder -w screen -f 60 -q very_high -a default_output -o "$out"
+fi

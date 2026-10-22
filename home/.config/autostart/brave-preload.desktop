@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Brave preload (paused while gaming)
+Comment=Keeps Brave warm for Super+W, but stops it while a game runs
+Exec=__HOME__/.local/bin/brave-gamewatch
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

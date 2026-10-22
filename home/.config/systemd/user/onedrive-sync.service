@@ -1,0 +1,6 @@
+[Unit]
+Description=Two-way OneDrive sync (Documents, Pictures)
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/onedrive-sync
