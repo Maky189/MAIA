@@ -1,4 +1,4 @@
-source /usr/share/cachyos-fish-config/cachyos-config.fish
+# base setup lives in conf.d/maia.fish
 
 # overwrite greeting
 # potentially disabling fastfetch

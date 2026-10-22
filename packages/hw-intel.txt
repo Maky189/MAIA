@@ -1,5 +1,3 @@
 intel-media-driver
-intel-media-sdk
-intel-ucode
-lib32-vulkan-intel
 vulkan-intel
+lib32-vulkan-intel

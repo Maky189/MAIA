@@ -1,0 +1,1 @@
+These wallpapers come from the cachyos-wallpapers package (https://github.com/CachyOS), licensed GPL-1.0.
