@@ -37,7 +37,8 @@ distrobox
 dmidecode
 dmraid
 dnsmasq
-dolphin
+nautilus
+loupe
 dosfstools
 duf
 e2fsprogs

@@ -2,7 +2,7 @@
 video/mp4=vlc.desktop;
 
 [Default Applications]
-inode/directory=org.kde.dolphin.desktop;
+inode/directory=org.gnome.Nautilus.desktop;
 text/plain=org.gnome.TextEditor.desktop;
 video/mp4=vlc.desktop;
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
@@ -11,3 +11,18 @@ x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/jetbrains=jetbrainsd.desktop
 application/pdf=org.pwmt.zathura.desktop
 x-scheme-handler/notion=notion.desktop
+x-scheme-handler/mailto=brave-browser.desktop
+image/png=org.gnome.Loupe.desktop;
+image/jpeg=org.gnome.Loupe.desktop;
+image/gif=org.gnome.Loupe.desktop;
+image/webp=org.gnome.Loupe.desktop;
+image/bmp=org.gnome.Loupe.desktop;
+image/tiff=org.gnome.Loupe.desktop;
+image/svg+xml=org.gnome.Loupe.desktop;
+image/avif=org.gnome.Loupe.desktop;
+image/heic=org.gnome.Loupe.desktop;
+image/heif=org.gnome.Loupe.desktop;
+image/jxl=org.gnome.Loupe.desktop;
+image/x-icon=org.gnome.Loupe.desktop;
+image/x-tga=org.gnome.Loupe.desktop;
+image/x-portable-pixmap=org.gnome.Loupe.desktop;

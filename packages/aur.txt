@@ -2,7 +2,6 @@ brave-bin
 heroic-games-launcher-bin
 mpvpaper
 swash
-qview
 tty-clock
 cbonsai
 unimatrix-git
