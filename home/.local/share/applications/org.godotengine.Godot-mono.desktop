@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Godot Engine
+Name=Godot Engine Mono
 GenericName=Libre game engine
 GenericName[el]=Ελεύθερη μηχανή παιχνιδιού
 GenericName[fr]=Moteur de jeu libre
@@ -19,10 +19,11 @@ Comment[ru]=Кроссплатформенный движок с многофу�
 Comment[uk]=Багатофункціональний кросплатформний рушій для створення 2D та 3D ігор
 Comment[zh_CN]=多平台 2D 和 3D 游戏引擎，带有功能丰富的编辑器
 Keywords=game development;development;IDE;game engine;
-Exec=prime-run /usr/bin/godot %f
-Icon=godot
+Exec=prime-run /usr/bin/godot-mono %f
+Icon=godot-mono
 Terminal=false
 Type=Application
 MimeType=application/x-godot-project;
 Categories=Development;IDE;
 StartupWMClass=Godot
+X-Desktop-File-Install-Version=0.28

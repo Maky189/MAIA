@@ -13,7 +13,6 @@ bash-completion
 bat
 bind
 blender
-godot
 bluez
 bluez-hid2hci
 bluez-libs
@@ -38,6 +37,7 @@ distrobox
 dmidecode
 dmraid
 dnsmasq
+dotnet-sdk
 nautilus
 loupe
 gnome-calendar
