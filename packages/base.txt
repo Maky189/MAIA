@@ -39,6 +39,8 @@ dmraid
 dnsmasq
 nautilus
 loupe
+gnome-calendar
+gnome-online-accounts
 dosfstools
 duf
 e2fsprogs
