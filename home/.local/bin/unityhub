@@ -1,0 +1,3 @@
+#!/bin/sh
+# Run Unity Hub on the NVIDIA GPU.
+exec prime-run /usr/bin/unityhub "$@"

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Unity Hub
+Comment=The Official Unity Hub
+GenericName=Unity Hub
+Exec=prime-run /usr/bin/unityhub %U
+Icon=unityhub
+Type=Application
+StartupNotify=true
+Categories=Development;
+MimeType=x-scheme-handler/unityhub;application/x-unityhub;
+

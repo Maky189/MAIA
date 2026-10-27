@@ -14,7 +14,7 @@ It uses Hyprland with the Noctalia shell, kitty with fish, and Neovim (LazyVim).
 - A "rice" scene on `Super + Shift + K` that opens fastfetch, a clock, cava, bonsai and btop as floating windows.
 - Neovim with LazyVim, plus my VS Code settings and extensions.
 - Gaming: Steam, Heroic, Lutris, gamemode, MangoHud, PCSX2 and PPSSPP. My PS2 and PSP games are added to Steam and Heroic with covers and artwork.
-- On laptops with an NVIDIA card, Steam, Blender and the emulators always run on the NVIDIA GPU, and Blender renders with OptiX.
+- On laptops with an NVIDIA card, Steam, Blender, Unity Hub and the emulators always run on the NVIDIA GPU, and Blender renders with OptiX.
 - Some system tweaks: zram, sysctl, I/O schedulers, ntsync for Wine, and my fish config.
 
 ## How to install:
@@ -99,7 +99,7 @@ Print                   screenshot
 
 - Put your wallpapers in `~/Pictures/Walpappers`. The theme takes its colors from them.
 - To change the default apps (terminal, browser...) edit `~/.config/hypr/config/variables.lua`. Monitors are in `monitors.lua`.
-- If you don't have an NVIDIA card, remove `prime-run` from `~/.local/share/applications/steam.desktop` (and the blender, pcsx2 and PPSSPP ones) and from `~/.local/bin/blender`.
+- If you don't have an NVIDIA card, remove `prime-run` from `~/.local/share/applications/steam.desktop` (and the blender, unityhub, pcsx2 and PPSSPP ones) and from `~/.local/bin/blender` and `~/.local/bin/unityhub`.
 - Very old NVIDIA cards (older than the GTX 16 series) don't work with the open driver; you need `nvidia-580xx-dkms` from the AUR instead.
 - The AI chat panel needs Claude Code or Codex installed and logged in.
 - OneDrive sync: run `rclone config` and name the remote `onedrive`. Then run `onedrive-sync --resync` once and `systemctl --user enable --now onedrive-sync.timer`.
