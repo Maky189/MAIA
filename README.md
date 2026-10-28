@@ -16,6 +16,7 @@ It uses Hyprland with the Noctalia shell, kitty with fish, and Neovim (LazyVim).
 - Gaming: Steam, Heroic, Lutris, gamemode, MangoHud, PCSX2 and PPSSPP. My PS2 and PSP games are added to Steam and Heroic with covers and artwork.
 - On laptops with an NVIDIA card, Steam, Blender, Godot, Unity Hub and the emulators always run on the NVIDIA GPU, and Blender renders with OptiX.
 - Some system tweaks: zram, sysctl, I/O schedulers, ntsync for Wine, and my fish config.
+- A fix for MediaTek MT7921 Wi-Fi cards that drop the connection after a while (it turns off their PCIe power saving).
 
 ## How to install:
 
