@@ -1,10 +1,11 @@
 [Added Associations]
-video/mp4=vlc.desktop;
+video/mp4=vlc.desktop;mpv.desktop;
+video/matroska=vlc.desktop;
 
 [Default Applications]
 inode/directory=org.gnome.Nautilus.desktop;
 text/plain=org.gnome.TextEditor.desktop;
-video/mp4=vlc.desktop;
+video/mp4=mpv.desktop
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
@@ -26,3 +27,7 @@ image/jxl=org.gnome.Loupe.desktop;
 image/x-icon=org.gnome.Loupe.desktop;
 image/x-tga=org.gnome.Loupe.desktop;
 image/x-portable-pixmap=org.gnome.Loupe.desktop;
+x-scheme-handler/codex=chatgpt.desktop
+x-scheme-handler/unityhub=unityhub.desktop
+x-scheme-handler/notion-agents=notion.desktop
+video/matroska=vlc.desktop

@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Ubuntu
+GenericName=Terminal entering Ubuntu
+Comment=Open a shell in the Ubuntu development container
+Categories=System;TerminalEmulator;X-Distrobox;
+Exec=/usr/bin/alacritty --config-file __HOME__/.config/alacritty/ubuntu.toml --working-directory __HOME__ -e /usr/bin/distrobox enter ubuntu
+Icon=__HOME__/.local/share/icons/distrobox/ubuntu.png
+Keywords=distrobox;
+NoDisplay=false
+Terminal=false
+TryExec=/usr/bin/distrobox
+Type=Application
+Actions=Remove;
+
+[Desktop Action Remove]
+Name=Remove Ubuntu from system
+Exec=/usr/bin/distrobox rm  ubuntu

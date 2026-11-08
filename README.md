@@ -9,6 +9,7 @@ It uses Hyprland with the Noctalia shell, kitty with fish, and Neovim (LazyVim).
 ## What it has
 
 - Hyprland (Lua config) with Noctalia for the bar, notifications, control center, lock screen and the login screen. The colors of everything change with the wallpaper.
+- A Noctalia dock with pinned apps and dots for running apps. It stays below fullscreen windows, so moving the pointer to the bottom doesn't bring it over a fullscreen app.
 - My own Quickshell widgets: an app launcher, a power menu, a wallpaper picker (images and video wallpapers) and an AI chat panel in the bar for Claude Code and Codex.
 - kitty, fish, starship, fastfetch, btop, cava and yazi, plus some fun terminal stuff like `clock`, `bonsai` and `matrix`.
 - A "rice" scene on `Super + Shift + K` that opens fastfetch, a clock, cava, bonsai and btop as floating windows.
@@ -96,15 +97,33 @@ Print                   screenshot
 - `gaming/`: the script that adds the games to Steam and Heroic
 - `wallpapers/`: some starter wallpapers, until you add your own
 
+## Current desktop snapshot
+
+The snapshot includes both `home/.config/noctalia/config.toml` and the saved UI settings in `home/.local/state/noctalia/settings.toml`. The installer restores both files, including the dock, launcher, plugins, desktop widgets and lock screen layout. The current wallpaper and lock screen image are in `home/Pictures/`.
+
+The dock order is VS Code, Brave, Blender, Rider, Steam, Minecraft Launcher, Neovim, IntelliJ IDEA, Discord, Notion, Spotify, CLion, Files and OBS Studio. Running apps show dots. Smart auto-hide is enabled, and `layer = "top"` keeps the dock below fullscreen windows.
+
+The Applications button at the start of the dock opens a grid version of the custom cozy launcher, with the same artwork, clock and search as `Super + Space`. The keyboard shortcut opens the list version. Both use `home/.config/quickshell/launcher/Launcher.qml`; `shell.qml` selects the list and `grid.qml` selects the grid. `launcher-toggle [list|grid]` opens or closes either layout, and switches layouts when the other one is open. In the grid, use the arrow keys to browse, Enter to launch and Escape to close.
+
+The launcher uses the wallpaper's Noctalia colors, a quiet opaque surface, inset artwork and spaced app tiles. Both layouts always show all apps in alphabetical order, with no category filters. Search includes every app. Both layouts offer clear-search and close buttons, keyboard hints and scroll indicators. App names use Noto Sans while the clock keeps Fantasque Sans Mono. Narrow windows hide the artwork to leave room for browsing.
+
+The dock uses the pinned `maia-launcher-grid.desktop` shortcut for this button, with Noctalia's built-in launcher button disabled (`launcher_position = "none"`). Keep that shortcut first in `dock.pinned` to preserve the button's position.
+
+Both launcher layouts pick random artwork on each opening, avoiding the image used on the previous opening even when switching layouts. The set includes the original banner and four generated cozy anime scenes: a rainy studio, sunset train, bookshop café and snowy attic. Add images to `home/.config/quickshell/launcher/artwork/` to extend it (PNG, JPEG or WebP). `choose-banner.py` remembers the last image in `$XDG_CACHE_HOME/maia-launcher/last-banner` (or `~/.cache/maia-launcher/last-banner`); that runtime cache is not included in the snapshot.
+
+The JetBrains launchers and icons are included so the pinned IDs resolve. Install IntelliJ IDEA, Rider and CLion through JetBrains Toolbox; the launchers expect its default `~/.local/share/JetBrains/Toolbox/apps/` paths. Toolbox itself is in the package list, but the installer does not download these IDEs.
+
+The Ubuntu launcher includes its own Alacritty profile and floating window rule. It expects a Distrobox container named `ubuntu`; container contents are not part of the snapshot. The TerraFora development preview also has a dedicated floating window rule. `Super + Shift + M` opens the Spotify desktop app.
+
 ## Some notes
 
 - Put your wallpapers in `~/Pictures/Walpappers`. The theme takes its colors from them.
 - To change the default apps (terminal, browser...) edit `~/.config/hypr/config/variables.lua`. Monitors are in `monitors.lua`.
-- If you don't have an NVIDIA card, remove `prime-run` from `~/.local/share/applications/steam.desktop` (and the blender, godot, unityhub, pcsx2 and PPSSPP ones) and from `~/.local/bin/blender`, `~/.local/bin/godot-mono` and `~/.local/bin/unityhub`.
+- If you don't have an NVIDIA card, remove `prime-run` from `~/.local/share/applications/steam.desktop` (and the blender, godot, unityhub, pcsx2, PPSSPP and minecraft-launcher ones) and from `~/.local/bin/blender`, `~/.local/bin/godot-mono` and `~/.local/bin/unityhub`.
 - Very old NVIDIA cards (older than the GTX 16 series) don't work with the open driver; you need `nvidia-580xx-dkms` from the AUR instead.
 - The AI chat panel needs Claude Code or Codex installed and logged in.
 - OneDrive sync: run `rclone config` and name the remote `onedrive`. Then run `onedrive-sync --resync` once and `systemctl --user enable --now onedrive-sync.timer`.
-- If I change something on my PC, I copy the file back into `home/` and commit it, so the repo stays up to date.
+- If I change something on my PC, I copy the file back into `home/` and commit it, so the repo stays up to date. Noctalia UI changes go in `home/.local/state/noctalia/settings.toml`; replace home-directory paths with `__HOME__` before saving them. Keep personal credentials, recent-file history and notification/clipboard state out of the repo. The Fish and XDG folder defaults remain portable to other Arch installs.
 
 ## Acknowledgments
 

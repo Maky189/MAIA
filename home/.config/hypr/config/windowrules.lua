@@ -140,3 +140,17 @@ rice("btop",   40,  540, 740, 500)
 rice("clock",  1140,  80, 740, 240)
 rice("cava",   1140, 340, 740, 300)
 rice("bonsai", 1140, 660, 740, 380)
+
+-- Dedicated Ubuntu Distrobox terminal
+hl.window_rule({
+    name = "ubuntu-distrobox-terminal",
+    match = { class = "^ubuntu-distrobox$" },
+    float = true,
+    center = true,
+    size = { 900, 575 },
+    persistent_size = false,
+    opacity = "1.0 override",
+})
+
+-- Keep the TerraFora development preview at the size requested by VS Code.
+hl.window_rule({ name = "terrafora-preview", match = { class = "^TerraFora$" }, float = true })

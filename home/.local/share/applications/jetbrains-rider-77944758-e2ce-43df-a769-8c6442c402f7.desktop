@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Rider 2026.2.4.1
+Exec="__HOME__/.local/share/JetBrains/Toolbox/apps/rider/bin/rider" %u
+Version=1.0
+Type=Application
+Categories=Development;IDE;
+Terminal=false
+Icon=jetbrains-rider-77944758-e2ce-43df-a769-8c6442c402f7
+X-Icon-Path=__HOME__/.local/share/icons/hicolor/scalable/apps/jetbrains-rider-77944758-e2ce-43df-a769-8c6442c402f7.svg
+X-Installed-Icon-Cache-Path=__HOME__/.local/share/icons/hicolor
+X-Icon-Name-Before-Sanitization=jetbrains-rider-77944758-e2ce-43df-a769-8c6442c402f7.desktop.icon.svg
+Comment=All-in-one IDE for .NET and game development
+StartupWMClass=jetbrains-rider
+StartupNotify=true

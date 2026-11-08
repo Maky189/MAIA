@@ -1,7 +1,17 @@
 #!/bin/sh
-# Toggle the Quickshell app launcher overlay.
-if pgrep -f "quickshell.*launcher" >/dev/null; then
-  pkill -f "quickshell.*launcher"
-else
-  exec quickshell -p "$HOME/.config/quickshell/launcher"
+# Toggle the cozy launcher: list for Super+Space, grid for the dock.
+case "${1:-list}" in
+  list) view=shell.qml; other=grid.qml ;;
+  grid) view=grid.qml; other=shell.qml ;;
+  *) printf 'Usage: launcher-toggle [list|grid]\n' >&2; exit 2 ;;
+esac
+launcher_dir="$HOME/.config/quickshell/launcher"
+
+# Close the current view on a second click, or switch from the other layout.
+if quickshell ipc -p "$launcher_dir/$view" call launcher close 2>/dev/null; then
+  exit 0
 fi
+quickshell ipc -p "$launcher_dir/$other" call launcher close 2>/dev/null || :
+MAIA_LAUNCHER_BANNER=$(python3 "$launcher_dir/choose-banner.py") || MAIA_LAUNCHER_BANNER="$launcher_dir/banner.jpg"
+export MAIA_LAUNCHER_BANNER
+exec quickshell -p "$launcher_dir/$view"

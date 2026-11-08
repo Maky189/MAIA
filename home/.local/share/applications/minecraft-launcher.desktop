@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Minecraft Launcher
+GenericName=Minecraft Launcher
+Comment=Official Minecraft Launcher
+Exec=/usr/bin/prime-run /usr/bin/minecraft-launcher.sh
+Icon=minecraft-launcher
+Terminal=false
+Categories=Game;Application;
+StartupNotify=true
+PrefersNonDefaultGPU=true
+X-KDE-RunOnDiscreteGpu=true

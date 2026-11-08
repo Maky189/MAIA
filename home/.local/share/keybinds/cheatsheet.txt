@@ -58,7 +58,7 @@ AI AGENTS (desktop)
   SUPER + K               Toggle terminal clock
   SUPER + SHIFT + K       Rice layout (fastfetch/btop/clock/cava/bonsai)
   SUPER + Y               Yazi file manager
-  SUPER + SHIFT + M       Spotify player
+  SUPER + SHIFT + M       Spotify
   SUPER + SHIFT + R       Start / stop screen recording
   SUPER + SHIFT + W       Wallpaper picker
 

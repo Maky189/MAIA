@@ -1,0 +1,398 @@
+config_version = 16
+
+[desktop_widgets]
+enabled = false
+schema_version = 2
+widget_order = [
+    "desktop-widget-0000000000000003",
+    "desktop-widget-0000000000000004",
+    "desktop-widget-0000000000000005",
+    "desktop-widget-0000000000000006",
+    "desktop-widget-0000000000000007",
+    "desktop-widget-0000000000000008"
+]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000003]
+    box_height = 352.0
+    box_width = 528.0
+    cx = 280.0
+    cy = 268.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "calendar"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000004]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1712.0
+    cy = 540.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000004.settings]
+        background = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000005]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1700.4000244140625
+    cy = 780.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "media_player"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+        layout = "horizontal"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000006]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 136.0
+    cy = 975.199951171875
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000006.settings]
+        stat = "cpu_usage"
+        stat2 = "cpu_temp"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000007]
+    box_height = 192.0
+    box_width = 368.0
+    cx = 1700.4000244140625
+    cy = 204.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
+        clock_style = "digital"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000008]
+    box_height = 160.0
+    box_width = 400.0
+    cx = 232.0
+    cy = 652.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000008.settings]
+        bands = 32
+        show_when_idle = true
+
+[dock]
+background_opacity = 0.52999998815357685
+enabled = true
+launcher_position = "none"
+layer = "top"
+pinned = [
+    "maia-launcher-grid",
+    "com.microsoft.VSCode",
+    "brave-browser",
+    "blender",
+    "jetbrains-rider-77944758-e2ce-43df-a769-8c6442c402f7",
+    "steam",
+    "minecraft-launcher",
+    "nvim",
+    "jetbrains-idea-68b0a416-9690-42d3-aac9-fd3280c0e712",
+    "discord",
+    "notion",
+    "spotify-launcher",
+    "jetbrains-clion-dd6cc181-b62c-4bd6-93ed-d1bd70dad419",
+    "org.gnome.Nautilus",
+    "com.obsproject.Studio"
+]
+reserve_space = false
+show_dots = true
+smart_auto_hide = true
+
+[location]
+address = "Mindelo Cape Verde"
+
+[lockscreen]
+blur_intensity = 0.0
+tint_intensity = 0.12
+transition = [ "fade", "disc", "honeycomb", "zoom" ]
+transition_duration = 900.0
+wallpaper = "__HOME__/Pictures/lockscreen/rdr2-campfire.png"
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+    "lockscreen-login-box@DP-3",
+    "lockscreen-login-box@DP-2",
+    "cozy-clock",
+    "cozy-date",
+    "cozy-greeting",
+    "lockscreen-login-box@eDP-1",
+    "cozy-media",
+    "lockscreen-login-box@DP-1"
+]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget.cozy-clock]
+    box_height = 170.0
+    box_width = 560.0
+    cx = 960.0
+    cy = 170.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.cozy-clock.settings]
+        background = false
+        clock_style = "digital"
+        color = "#fff4ee"
+        font_family = "FantasqueSansM Nerd Font Mono"
+        format = "{:%H:%M}"
+        shadow = true
+
+    [lockscreen_widgets.widget.cozy-date]
+    box_height = 50.0
+    box_width = 560.0
+    cx = 960.0
+    cy = 280.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.cozy-date.settings]
+        background = false
+        clock_style = "digital"
+        color = "#f0b56a"
+        font_family = "FantasqueSansM Nerd Font Mono"
+        format = "{:%A, %d %B}"
+        shadow = true
+
+    [lockscreen_widgets.widget.cozy-greeting]
+    box_height = 38.0
+    box_width = 560.0
+    cx = 960.0
+    cy = 335.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "label"
+
+        [lockscreen_widgets.widget.cozy-greeting.settings]
+        background = false
+        color = "#fff4ee"
+        font_family = "FantasqueSansM Nerd Font Mono"
+        opacity = 0.84999999999999998
+        shadow = true
+        title = "🎮  welcome back, maky188"
+
+    [lockscreen_widgets.widget.cozy-media]
+    box_height = 100.0
+    box_width = 380.0
+    cx = 230.0
+    cy = 985.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "media_player"
+
+        [lockscreen_widgets.widget.cozy-media.settings]
+        background = true
+        background_color = "surface"
+        background_opacity = 0.65000000000000002
+        background_radius = 20.0
+        font_family = "FantasqueSansM Nerd Font Mono"
+        hide_when_no_media = true
+        layout = "horizontal"
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "DP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
+        background_color = "surface_container"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "DP-2"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
+        background_color = "surface_container"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "DP-3"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_container"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 70.0
+    box_width = 520.0
+    cx = 960.0
+    cy = 985.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface"
+        background_opacity = 0.71999999999999997
+        background_radius = 24.0
+        center_password_text = true
+        input_opacity = 0.90000000000000002
+        input_radius = 16.0
+        layout = "compact"
+        show_caps_lock = true
+        show_keyboard_layout = false
+        show_login_button = true
+        show_media = false
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = false
+        show_weather = true
+
+[plugins]
+enabled = [
+    "nomadcxx/gamer-mode",
+    "damian-ds7/battery-threshold",
+    "baizhu/asus-gpu-mode",
+    "felipeartur/ai-usagebar",
+    "local/wallpaper-hub",
+    "local/ai-chat"
+]
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/official-plugins"
+    name = "official"
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/community-plugins"
+    name = "community"
+
+    [[plugins.source]]
+    kind = "path"
+    location = "__HOME__/.config/noctalia/local-plugins"
+    name = "local"
+
+[shell.launcher]
+app_grid = true
+default_view = "all"
+show_app_origin_indicator = false
+show_navigation_labels = false
+show_session_button = false
+show_settings_button = false
+
+[theme]
+builtin = "Noctalia"
+community_palette = "Koneko"
+wallpaper_scheme = "soft"
+
+    [theme.templates]
+    builtin_ids = [ "alacritty", "btop", "cava", "gtk3", "gtk4", "kcolorscheme", "kitty", "qt" ]
+
+[wallpaper]
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "__HOME__/Pictures/Walpappers/sunset-horizon-scenery-house-art-hd-wallpaper-uhdpaper.com-10@0@j.jpg"
+
+    [wallpaper.last]
+    path = "__HOME__/Pictures/Walpappers/sunset-horizon-scenery-house-art-hd-wallpaper-uhdpaper.com-10@0@j.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "__HOME__/Pictures/Walpappers/sunset-horizon-scenery-house-art-hd-wallpaper-uhdpaper.com-10@0@j.jpg"

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Applications
+Comment=Browse applications in the cozy launcher grid
+Exec=__HOME__/.local/bin/launcher-toggle grid
+Icon=__HOME__/.local/share/icons/hicolor/scalable/apps/maia-launcher-grid.svg
+Terminal=false
+StartupNotify=false
+Categories=Utility;
+Keywords=launcher;applications;grid;

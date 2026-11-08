@@ -140,7 +140,7 @@ hl.bind(mainMod .. " + K", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/bin/clo
 -- Recording, file manager, music
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/bin/rec-toggle"))
 hl.bind(mainMod .. " + Y",         hl.dsp.exec_cmd(launchPrefix .. "kitty --class yazi -e yazi"))
-hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd(launchPrefix .. "kitty --class spotify -e spotify_player"))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd(launchPrefix .. "spotify-launcher"))
 
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/bin/rice-layout"))
 

@@ -21,6 +21,10 @@ local function app_key(window)
     local class = window.initial_class
     if not class or class == "" then class = window.class end
     if not class or class == "" then return nil end
+    -- Ubuntu always uses its dedicated floating window rule.
+    if class == "ubuntu-distrobox" then return nil end
+    -- TerraFora's windowed preview uses its dedicated floating rule.
+    if class == "TerraFora" then return nil end
     return encode(class)
 end
 
