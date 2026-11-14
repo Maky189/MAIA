@@ -27,6 +27,7 @@ WINDOWS
   SUPER + left-drag       Move window
   SUPER + right-drag      Resize window
   SUPER + Escape          Kill a window (click it)
+  SUPER + SHIFT + Escape  Force-kill the focused window (frozen game)
 
 WORKSPACES
   SUPER + ALT + 1-9       Go to workspace N

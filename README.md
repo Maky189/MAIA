@@ -17,6 +17,8 @@ It uses Hyprland with the Noctalia shell, kitty with fish, and Neovim (LazyVim).
 - Gaming: Steam, Heroic, Lutris, gamemode, MangoHud, PCSX2 and PPSSPP. My PS2 and PSP games are added to Steam and Heroic with covers and artwork.
 - On laptops with an NVIDIA card, Steam, Blender, Godot, Unity Hub and the emulators always run on the NVIDIA GPU, and Blender renders with OptiX.
 - Some system tweaks: zram, sysctl, I/O schedulers, ntsync for Wine, and my fish config.
+- A warning before the disk fills up: a notification under 30 GB free and a red one under 10 GB. The package cache also cleans itself every week and keeps the last two versions of each package. I added this because a full disk once broke my whole session.
+- `Super + Shift + Escape` force-kills the focused window, for when a game freezes and doesn't close with `Super + Q`.
 - A fix for MediaTek MT7921 Wi-Fi cards that drop the connection after a while (it turns off their PCIe power saving).
 
 ## How to install:
@@ -46,7 +48,7 @@ Before the script replaces any file, it copies it to `~/.maia-backup/`, so you d
 2. Looks at your hardware and adds what it needs: NVIDIA drivers (the right module for your kernel), Intel or AMD drivers, CPU microcode, and the ASUS tools on ASUS laptops.
 3. Installs `yay` and the AUR packages in `packages/aur.txt`. If your distro already has one of them in its own repos, it uses that version instead. DaVinci Resolve is optional because it's a big download.
 4. Copies everything in `home/` to your home folder, changing the paths to your username.
-5. Puts the system tweaks from `system/` in `/etc`, makes fish your shell, turns on the services (network, bluetooth, firewall...) and sets up the Noctalia login screen.
+5. Puts the system tweaks from `system/` in `/etc`, makes fish your shell, turns on the services (network, bluetooth, firewall, weekly package cache cleanup, the disk space warning...) and sets up the Noctalia login screen.
 6. Installs the VS Code extensions and the Neovim plugins.
 7. Adds the PS2/PSP games to Steam and Heroic (only if the ISOs are there).
 
@@ -74,6 +76,7 @@ Super + Space           app launcher
 Super + W               browser
 Super + E               file manager
 Super + Q               close window
+Super + Shift + Escape  force-kill the focused window (frozen game)
 Super + F               fullscreen
 Super + V               clipboard history
 Super + X               control center
@@ -87,6 +90,21 @@ Super + L               lock
 Super + Alt + C         power menu
 Print                   screenshot
 ```
+
+## If a game freezes
+
+Most of the time only the game is frozen, not the PC, so don't hold the power button. I try these in order:
+
+1. `Super + Shift + Escape` to force-kill the game.
+2. `Super + Escape`, then click the game.
+3. `Ctrl + Alt + F3` to get a text login, log in, run `pkill -9 -f <game>.exe`, then `Ctrl + Alt + F1` to go back to the desktop.
+4. If nothing works, hold `Alt + PrtSc` (with `Fn` on some laptops) and press `R E I S U B` slowly, one key at a time. It saves everything to disk and reboots cleanly.
+
+On my laptop the GPU only has 4 GB of VRAM, and on Linux the NVIDIA driver handles a full VRAM much worse than Windows does. Games crash or freeze instead of just stuttering. So I keep the in-game VRAM bar some room below the limit, and I cap heavy games at 50 fps with MangoHud. For GTA V the Steam launch option is:
+```
+MANGOHUD_CONFIG=fps_limit=50,no_display mangohud %command%
+```
+`Right Shift + F12` shows the fps counter. Steam keeps launch options in its own config, so they aren't in the repo.
 
 ## Folders
 

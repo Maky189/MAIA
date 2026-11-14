@@ -1,0 +1,8 @@
+[Unit]
+Description=Warn when the disk is almost full
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/disk-space-warn
+Nice=19
+IOSchedulingClass=idle

@@ -1,0 +1,12 @@
+#!/bin/sh
+# Force-kill the focused window (kill -9), for a frozen game that ignores Super+Q.
+# Bound to Super+Shift+Escape in ~/.config/hypr/config/binds.lua.
+pid=$(hyprctl activewindow -j | jq -r '.pid // empty')
+case "$pid" in
+  ''|*[!0-9]*) exit 0 ;;
+esac
+[ "$pid" -gt 1 ] || exit 0
+name=$(ps -o comm= -p "$pid")
+# never take down the compositor or Xwayland (that would close every X11 app)
+case "$name" in Hyprland|Xwayland|uwsm*|systemd) exit 0 ;; esac
+kill -9 "$pid" && notify-send -a "Force kill" "Killed ${name:-window} (pid $pid)"

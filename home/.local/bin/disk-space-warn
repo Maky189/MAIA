@@ -1,0 +1,41 @@
+#!/bin/sh
+# Pop a desktop notification before the disk fills up (a full btrfs root breaks the session).
+# Run every 10 min by disk-space-warn.timer.
+#   under 30 GB free -> normal warning, repeated at most every 2 h
+#   under 10 GB free -> critical warning (stays on screen), repeated at most every 20 min
+# A warning also shows right away whenever the level gets worse.
+# Test it with:  DISK_WARN_TEST=1 disk-space-warn
+warn_gb=30
+crit_gb=10
+state="$HOME/.local/state/disk-space-warn"
+
+free_gb=$(df --output=avail -BG / | tail -1 | tr -dc '0-9')
+[ -n "$free_gb" ] || exit 0
+[ -n "$DISK_WARN_TEST" ] && free_gb=$((crit_gb - 1))
+
+if [ "$free_gb" -lt "$crit_gb" ]; then
+  level=2 every=1200
+elif [ "$free_gb" -lt "$warn_gb" ]; then
+  level=1 every=7200
+else
+  rm -f "$state"
+  exit 0
+fi
+
+now=$(date +%s)
+last_level=0 last_time=0
+[ -f "$state" ] && read -r last_level last_time < "$state"
+
+if [ "$level" -gt "$last_level" ] || [ $((now - last_time)) -ge "$every" ] || [ -n "$DISK_WARN_TEST" ]; then
+  if [ "$level" -eq 2 ]; then
+    notify-send -u critical -a "Disk space" -i drive-harddisk \
+      "Disk almost full: ${free_gb} GB left" \
+      "Free space now. Below a few GB, apps and the desktop start breaking. Big wins: Steam games, ~/.cache, old snapshots (btrfs-assistant)."
+  else
+    notify-send -u normal -a "Disk space" -i drive-harddisk \
+      "Disk getting full: ${free_gb} GB left" \
+      "Worth cleaning up soon (ncdu ~ shows what's big)."
+  fi
+  if [ -z "$DISK_WARN_TEST" ]; then echo "$level $now" > "$state"; fi
+fi
+exit 0

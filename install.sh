@@ -189,7 +189,7 @@ setup_system() {
   # NetworkManager, unless the system already uses systemd-networkd
   systemctl is-enabled systemd-networkd &>/dev/null || enable_unit NetworkManager
   for u in bluetooth ufw avahi-daemon power-profiles-daemon switcheroo-control ananicy-cpp fstrim.timer \
-           supergfxd snapper-cleanup.timer limine-snapper-sync; do
+           supergfxd snapper-cleanup.timer limine-snapper-sync paccache.timer; do
     enable_unit "$u"
   done
   if has_nvidia; then enable_unit nvidia-powerd; fi
@@ -211,8 +211,14 @@ setup_system() {
     asusctl aura effect rainbow-cycle --speed med &>/dev/null && ok "keyboard RGB: rainbow" || true
   fi
 
-  # OneDrive sync timer only makes sense once rclone has a "onedrive" remote
   systemctl --user daemon-reload || true
+  if systemctl --user enable --now disk-space-warn.timer &>/dev/null; then
+    ok "disk space warning (under 30 GB free)"
+  else
+    warn "could not turn on the disk space warning: systemctl --user enable --now disk-space-warn.timer"
+  fi
+
+  # OneDrive sync timer only makes sense once rclone has a "onedrive" remote
   if command -v rclone >/dev/null && rclone listremotes 2>/dev/null | grep -qx 'onedrive:'; then
     systemctl --user enable --now onedrive-sync.timer && ok "OneDrive sync every 5 min"
   else
