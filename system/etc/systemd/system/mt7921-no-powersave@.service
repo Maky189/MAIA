@@ -1,0 +1,12 @@
+[Unit]
+Description=Turn off the MT7921 Wi-Fi chip's own power saving on %i
+# Even with PCIe ASPM off, the chip has its own sleep mode (runtime PM + deep sleep).
+# Sometimes it doesn't wake up ("driver own failed" in the log), the card falls off
+# the PCIe bus and Wi-Fi is gone until a reboot. Started by 70-mt7921-no-powersave.rules.
+After=sys-kernel-debug.mount
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'd=/sys/kernel/debug/ieee80211/$$(basename $$(readlink /sys/class/net/%i/phy80211))/mt76; \
+  for i in 1 2 3 4 5 6 7 8 9 10; do [ -e $$d/runtime-pm ] && break; sleep 1; done; \
+  echo 0 > $$d/runtime-pm && echo 0 > $$d/deep-sleep'

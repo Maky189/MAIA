@@ -19,7 +19,7 @@ It uses Hyprland with the Noctalia shell, kitty with fish, and Neovim (LazyVim).
 - Some system tweaks: zram, sysctl, I/O schedulers, ntsync for Wine, and my fish config.
 - A warning before the disk fills up: a notification under 30 GB free and a red one under 10 GB. The package cache also cleans itself every week and keeps the last two versions of each package. I added this because a full disk once broke my whole session.
 - `Super + Shift + Escape` force-kills the focused window, for when a game freezes and doesn't close with `Super + Q`.
-- A fix for MediaTek MT7921 Wi-Fi cards that drop the connection after a while (it turns off their PCIe power saving).
+- A fix for MediaTek MT7921 Wi-Fi cards that drop the connection after a while. It turns off their PCIe power saving and also the chip's own sleep mode, because sometimes the chip doesn't wake up from it and the Wi-Fi is gone until a reboot.
 
 ## How to install:
 
